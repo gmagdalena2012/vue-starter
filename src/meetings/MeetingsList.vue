@@ -10,11 +10,18 @@
         <tbody>
         <tr v-for="meeting in meetings" :key="meeting.name">
             <td>{{ meeting.name }}</td>
-            <td>{{ meeting.description }}
-			<td style="text-align: right">
-                <button id="enrollButton" class="button button-outline">Zapisz się</button>
-                <button>Usuń puste spotkanie</button>
+            <td>{{ meeting.description }}</td>
+			<td>
+                <ul>
+                    <li v-for="user in meeting.participants" :key="user">
+                                {{user}}
+                    </li>
+                 </ul>
             </td>
+            <td class="action-buttons">
+                 <button id="enrollButton" class="button button-outline" @click="enroll(meeting)" v-if="meeting.participants.indexOf(username) < 0" >Zapisz się</button>
+                 <button v-if="meeting.participants.length === 0" @click = "deleteMeeting(meeting)">Usuń puste spotkanie</button>
+			</td>
         </tr>
         </tbody>
     </table>
@@ -23,6 +30,23 @@
 
 <script>
     export default {
-        props: ['meetings']
-    }
+        props: ['meetings','username'],
+        methods: {
+            enroll(meeting) {
+                this.$emit('enrollToMeeting', meeting)
+            },
+            deleteMeeting(meeting) {
+                this.$emit('delete', meeting);
+            }
+        }
+		}
 </script>
+
+<style scoped>
+    #enrollButton {
+        margin-right: 5px;
+    }
+    td.action-buttons {
+        text-align: right;
+    }
+</style>
