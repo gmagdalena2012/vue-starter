@@ -20,7 +20,16 @@
         methods: {
             addNewMeeting(meeting) {
                 this.meetings.push(meeting);
-            }
+            },
+			deleteMeeting(meeeting) {
+                this.meetings.splice(this.meetings.indexOf(meeting),1);
+            },
+            addParticipantToMeeting(meeting){
+                meeting.participants.push();
+            },
+            deleteParticipantFromMeeting(){
+                meeting.participants.splice(meeting.participants.indexOf(this.email));
         }
     }
+	}
 </script>

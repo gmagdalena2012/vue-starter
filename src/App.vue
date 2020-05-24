@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Witaj w systemie do zapisów na zajęcia</h1>
+        <h1>Zapisy online na zajecia</h1>
 
         <div v-if="authenticatedUsername">
             <user-panel :username="authenticatedUsername" @logout="logMeOut()"></user-panel>
@@ -19,9 +19,11 @@
     import LoginForm from "./LoginForm";
     import UserPanel from "./UserPanel";
     import MeetingsPage from "./meetings/MeetingsPage";
+    import NewMeetingForm from "./meetings/NewMeetingForm";
+    import MeetingsList from "./meetings/MeetingsList";
 
     export default {
-        components: {LoginForm, MeetingsPage, UserPanel},
+    	components: {LoginForm, MeetingsPage, UserPanel, NewMeetingForm, MeetingsList},
         data() {
             return {
                 authenticatedUsername: '',
